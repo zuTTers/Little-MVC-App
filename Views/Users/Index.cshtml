@@ -1,0 +1,141 @@
+﻿@model TestWeb.Models.ViewModels.UserListViewModel
+@{
+    ViewBag.Title = "Kişiler";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="col-md-12" style="padding:15px;font-size:20px;background-color:darkcyan;"><span class="glyphicon glyphicon-list-alt"></span> Kişi Listesi</div>
+        <div class="col-md-12" style="padding:15px;font-size:15px;background-color:darksalmon;">
+            <form action="@Url.Action("Index","Users")" method="post">
+                <input name="filter" type="search" class="form-control-static input-sm" placeholder="aranan isim.." /> <input type="submit" value="Ara" class="btn btn-danger" />
+            </form>
+            <table class="table table-responsive">
+                <tr>
+                    @{
+                        if (string.IsNullOrEmpty(ViewBag.orderby) || (ViewBag.orderby == "FirstName" && ViewBag.otype == "desc"))
+                        {
+                            <td>@Html.ActionLink("Ad", "Index", new { orderby = "FirstName", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+                        else if (ViewBag.orderby == "FirstName" && ViewBag.otype == "asc")
+                        {
+                            <td>@Html.ActionLink("Ad", "Index", new { orderby = "FirstName", otype = "desc" }, new { @class = "glyphicon glyphicon-chevron-up" }) </td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("Ad", "Index", new { orderby = "FirstName", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+
+                    }
+
+                    @{
+                        if (string.IsNullOrEmpty(ViewBag.orderby) || (ViewBag.orderby == "LastName" && ViewBag.otype == "desc"))
+                        {
+                            <td>@Html.ActionLink("Soyad", "Index", new { orderby = "LastName", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+                        else if (ViewBag.orderby == "LastName" && ViewBag.otype == "asc")
+                        {
+                            <td>@Html.ActionLink("Soyad", "Index", new { orderby = "LastName", otype = "desc" }, new { @class = "glyphicon glyphicon-chevron-up" }) </td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("Soyad", "Index", new { orderby = "LastName", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+
+                    }
+
+                    @{
+                        if (string.IsNullOrEmpty(ViewBag.orderby) || (ViewBag.orderby == "Gender" && ViewBag.otype == "desc"))
+                        {
+                            <td>@Html.ActionLink("Cinsiyet", "Index", new { orderby = "Gender", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+                        else if (ViewBag.orderby == "Gender" && ViewBag.otype == "asc")
+                        {
+                            <td>@Html.ActionLink("Cinsiyet", "Index", new { orderby = "Gender", otype = "desc" }, new { @class = "glyphicon glyphicon-chevron-up" }) </td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("Cinsiyet", "Index", new { orderby = "Gender", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+
+                    }
+
+                    @{
+                        if (string.IsNullOrEmpty(ViewBag.orderby) || (ViewBag.orderby == "CreatedDate" && ViewBag.otype == "desc"))
+                        {
+                            <td>@Html.ActionLink("Kayıt Tarihi", "Index", new { orderby = "CreatedDate", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+                        else if (ViewBag.orderby == "CreatedDate" && ViewBag.otype == "asc")
+                        {
+                            <td>@Html.ActionLink("Kayıt Tarihi", "Index", new { orderby = "CreatedDate", otype = "desc" }, new { @class = "glyphicon glyphicon-chevron-up" }) </td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("Kayıt Tarihi", "Index", new { orderby = "CreatedDate", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+
+                    }
+
+                    @{
+                        if (string.IsNullOrEmpty(ViewBag.orderby) || (ViewBag.orderby == "UserName" && ViewBag.otype == "desc"))
+                        {
+                            <td>@Html.ActionLink("Kullanıcı Adı", "Index", new { orderby = "UserName", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+                        else if (ViewBag.orderby == "UserName" && ViewBag.otype == "asc")
+                        {
+                            <td>@Html.ActionLink("Kullanıcı Adı", "Index", new { orderby = "UserName", otype = "desc" }, new { @class = "glyphicon glyphicon-chevron-up" }) </td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink("Kullanıcı Adı", "Index", new { orderby = "UserName", otype = "asc" }, new { @class = "glyphicon glyphicon-chevron-down" }) </td>
+                        }
+
+                    }
+
+                    <td><span class="text-primary glyphicon glyphicon-pencil"> İşlem</span></td>
+                </tr>
+
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Gender</td>
+                        <td>@user.CreatedDate.Value.ToString("dd.MM.yyyy")</td>
+                        <td>@user.UserName</td>
+                        <td>@Html.ActionLink(" İncele", "UserDetail", "Users", new { id = user.UserID }, new { @class = "btn btn-success glyphicon glyphicon-zoom-in" })</td>
+                    </tr>
+                }
+
+            </table>
+            
+            <ul class="pagination pagination-sm">
+                <li>
+                    @{
+                        for (int i = 1; i <= Model.TotalPage; i++)
+                        {
+                            if (i == Model.CurrentPage)
+                            {
+                                @Html.ActionLink(i.ToString(), "Index", new { p = i }, new { @class = "text-danger" });
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(i.ToString(), "Index", new { p = i });
+                            }
+                        }
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="col-md-12" style="padding:15px;font-size:20px;background-color:darkcyan;"><span class="glyphicon glyphicon-tasks"></span> Görevler</div>
+        <div class="col-md-12" style="padding:15px;font-size:15px;background-color:darksalmon;">
+            <ul class="list-unstyled">                
+                <li class="list-group-item">@Html.ActionLink("Kişi Ekle", "UserAdd", "Users")</li>                
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,19 @@
+﻿@model Users
+@{
+    ViewBag.Title = "Kişi Düzenle";
+}
+<h2>Kişi Düzenle</h2>
+<form action="@Url.Action("UserUpdate","Users")" method="post">
+    <div class="row">
+        <input name="UserID" type="hidden" class="form-control" value="@Model.UserID" />
+        <p>@Html.TextBoxFor(m => m.FirstName, new { @class= "form-control" })</p>
+        <p>@Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })</p>
+        <p>@Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })</p>
+        <p>@Html.TextBoxFor(m => m.CreatedDate, "{0:dd.MM.yyyy}", new { @class = "form-control default-date-picker" })</p>
+        <p>@Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })</p>
+        <p>@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })</p>
+        <p><input class="btn btn-success" type="submit" value="Güncelle" /></p>        
+    </div>
+</form>
+
+

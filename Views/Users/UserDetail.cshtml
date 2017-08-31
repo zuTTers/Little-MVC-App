@@ -1,0 +1,25 @@
+﻿@model Users
+@{
+    ViewBag.Title = "Kişi Bilgileri";
+}
+
+<h2>Kişi İncelemesi</h2>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item">Ad : @Model.FirstName</li>
+            <li class="list-group-item">Soyad: @Model.LastName</li>
+            <li class="list-group-item">Cinsiyet : @Model.Gender</li>
+            <li class="list-group-item">Kayıt Tarihi: @Model.CreatedDate.Value.ToString("dd.MM.yyyy")</li>
+
+        </ul>
+        <span class="btn">
+            @Html.ActionLink(" Düzenle", "UserEdit", "Users", new { id = Model.UserID }, new { @class = "btn btn-warning glyphicon glyphicon-edit" })
+        </span>
+        <span class="btn">
+            @Html.ActionLink(" Sil", "UserDelete", "Users", new { id = Model.UserID }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+        </span>
+
+    </div>
+</div>
+

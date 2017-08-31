@@ -1,0 +1,24 @@
+﻿@model Users
+@{
+    ViewBag.Title = "Kişi Ekle";
+}
+
+
+
+<h2>Kişi Ekle</h2>
+<form action="@Url.Action("UserAdder","Users")" method="post">
+    <div>             
+        <p>@Html.TextBox("FirstName","", new { @class = "form-control", @placeholder="Ad" })</p>
+        <p>@Html.TextBox("LastName", "", new { @class = "form-control", @placeholder = "Soyad" })</p>
+        <p>@Html.DropDownList("Gender",
+                    new SelectListItem[] { new SelectListItem { Text = "Erkek", Value = "Erkek" }, new SelectListItem { Text = "Kız", Value = "Kız" } },
+                    new { @class = "form-control" })</p>
+        <p>@Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control default-date-picker" } })</p>
+        <p>@Html.TextBox("Email", "", new { @class = "form-control", @placeholder = "Email" ,@type="email", @required = "required" })</p>
+        <p>@Html.TextBox("UserName", "", new { @class = "form-control", @placeholder = "Kullanıcı Adı", @required= "required" })</p>
+        <p>@Html.TextBox("Password", "", new { @class = "form-control", @placeholder = "Şifre", @type="password", @required = "required" })</p>
+        <p>@Html.TextBox("Password2", "", new { @class = "form-control", @placeholder = "Tekrar Şifre", @type = "password", @required = "required" })</p>
+        <p><input class="btn btn-success" type="submit" value="Ekle" /></p>
+    </div>
+</form>
+
